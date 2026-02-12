@@ -14,7 +14,7 @@ export class MealPlannerService {
   }
 
   private createRamadanMenu(preferences: UserPreferences): MealPlan {
-    const { familySize, budget } = preferences;
+    const { familySize, budget = 2000 } = preferences;
     
     // Filter recipes based on preferences
     const filteredSuhoor = this.filterRecipes(pakistaniRecipes.suhoor, preferences);
@@ -27,6 +27,7 @@ export class MealPlannerService {
       
       menu.push({
         day,
+        date: `Day ${day}`,
         suhoor: this.scaleRecipe(suhoor, familySize, preferences.ageGroups, preferences.specialNeeds),
         iftar: this.scaleRecipe(iftar, familySize, preferences.ageGroups, preferences.specialNeeds),
         totalCost: (suhoor.cost * familySize) + (iftar.cost * familySize)
@@ -38,6 +39,9 @@ export class MealPlannerService {
     const shoppingList = this.generateShoppingList(menu);
 
     return {
+      id: `meal-plan-${Date.now()}`,
+      startDate: '2026-02-28',
+      endDate: '2026-03-30',
       preferences,
       menu,
       totalBudget,
@@ -70,8 +74,8 @@ export class MealPlannerService {
         if (restrictions.includes('diabetic') && !recipe.healthTags.includes('diabetic')) {
           if (recipe.nutrition.calories > 400) return false;
         }
-        if (restrictions.includes('lowcarb') && recipe.nutrition.carbs > 30) return false;
-        if (restrictions.includes('highprotein') && recipe.nutrition.protein < 20) return false;
+        if (restrictions.includes('lowcarb') && (recipe.nutrition.carbs || 0) > 30) return false;
+        if (restrictions.includes('highprotein') && (recipe.nutrition.protein || 0) < 20) return false;
         if (restrictions.includes('nobeef') && recipe.ingredients.some(ing => ing.toLowerCase().includes('beef'))) return false;
         if (restrictions.includes('nomutton') && recipe.ingredients.some(ing => ing.toLowerCase().includes('mutton'))) return false;
       }
@@ -86,8 +90,8 @@ export class MealPlannerService {
       // Special needs filter
       if (specialNeeds && specialNeeds.length > 0) {
         if (specialNeeds.includes('elderly') && recipe.cookingTime === 'full') return false;
-        if (specialNeeds.includes('athletes') && recipe.nutrition.protein < 25) return false;
-        if (specialNeeds.includes('pregnancy') && recipe.nutrition.protein < 20) return false;
+        if (specialNeeds.includes('athletes') && (recipe.nutrition.protein || 0) < 25) return false;
+        if (specialNeeds.includes('pregnancy') && (recipe.nutrition.protein || 0) < 20) return false;
       }
       
       // Equipment filter
@@ -158,9 +162,9 @@ export class MealPlannerService {
       ...recipe,
       nutrition: {
         calories: Math.round(recipe.nutrition.calories * scaleFactor * nutritionMultiplier),
-        protein: Math.round(recipe.nutrition.protein * scaleFactor * nutritionMultiplier),
-        carbs: Math.round(recipe.nutrition.carbs * scaleFactor),
-        fat: Math.round(recipe.nutrition.fat * scaleFactor)
+        protein: Math.round((recipe.nutrition.protein || 0) * scaleFactor * nutritionMultiplier),
+        carbs: Math.round((recipe.nutrition.carbs || 0) * scaleFactor),
+        fat: Math.round((recipe.nutrition.fat || 0) * scaleFactor)
       },
       cost: Math.round(recipe.cost * scaleFactor)
     };

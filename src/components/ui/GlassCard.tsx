@@ -8,9 +8,10 @@ interface GlassCardProps {
   className?: string;
   hover?: boolean;
   glow?: boolean;
+  onClick?: () => void;
 }
 
-export default function GlassCard({ children, className = '', hover = true, glow = true }: GlassCardProps) {
+export default function GlassCard({ children, className = '', hover = true, glow = true, onClick }: GlassCardProps) {
   return (
     <motion.div
       className={`
@@ -27,6 +28,7 @@ export default function GlassCard({ children, className = '', hover = true, glow
         boxShadow: '0 20px 60px rgba(0, 0, 0, 0.4), 0 0 50px rgba(251, 191, 36, 0.3)',
         borderColor: 'rgba(251, 191, 36, 0.5)'
       } : {}}
+      onClick={onClick}
     >
       {/* Golden shimmer effect */}
       <div className="absolute inset-0 -z-10">

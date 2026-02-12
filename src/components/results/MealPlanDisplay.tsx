@@ -155,7 +155,7 @@ export default function MealPlanDisplay({ mealPlan }: MealPlanDisplayProps) {
       <GlassCard className="p-8">
         <h3 className="text-2xl font-bold text-yellow-400 mb-6">Shopping List</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {Object.entries(mealPlan.shoppingList).map(([category, items]) => (
+          {mealPlan.shoppingList && Object.entries(mealPlan.shoppingList).map(([category, items]) => (
             <div key={category} className="bg-white/5 p-6 rounded-xl border border-yellow-400/20">
               <h4 className="text-lg font-semibold text-white mb-4 pb-2 border-b border-yellow-400/20">
                 {category}
