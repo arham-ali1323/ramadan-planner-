@@ -59,13 +59,19 @@ export default function PreferencesForm({ onSubmit, loading }: PreferencesFormPr
               onChange={(e) => updatePreferences('familySize', parseInt(e.target.value))}
               className="w-full px-4 py-3 bg-white/5 border border-yellow-400/20 rounded-xl 
                        text-white focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400/50
-                       backdrop-blur-sm transition-all"
+                       backdrop-blur-sm transition-all appearance-none cursor-pointer"
+              style={{
+                backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23fbbf24' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+                backgroundPosition: 'right 0.5rem center',
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: '1.5em 1.5em'
+              }}
             >
-              <option value="2">2 members</option>
-              <option value="4">4 members</option>
-              <option value="6">6 members</option>
-              <option value="8">8 members</option>
-              <option value="10">10+ members</option>
+              <option value="2" className="bg-gray-900 text-white">2 members</option>
+              <option value="4" className="bg-gray-900 text-white">4 members</option>
+              <option value="6" className="bg-gray-900 text-white">6 members</option>
+              <option value="8" className="bg-gray-900 text-white">8 members</option>
+              <option value="10" className="bg-gray-900 text-white">10+ members</option>
             </select>
           </div>
 
@@ -105,16 +111,22 @@ export default function PreferencesForm({ onSubmit, loading }: PreferencesFormPr
               onChange={(e) => updatePreferences('city', e.target.value)}
               className="w-full px-4 py-3 bg-white/5 border border-yellow-400/20 rounded-xl 
                        text-white focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400/50
-                       backdrop-blur-sm transition-all"
+                       backdrop-blur-sm transition-all appearance-none cursor-pointer"
+              style={{
+                backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23fbbf24' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+                backgroundPosition: 'right 0.5rem center',
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: '1.5em 1.5em'
+              }}
             >
-              <option value="karachi">Karachi</option>
-              <option value="lahore">Lahore</option>
-              <option value="islamabad">Islamabad</option>
-              <option value="peshawar">Peshawar</option>
-              <option value="quetta">Quetta</option>
-              <option value="multan">Multan</option>
-              <option value="faisalabad">Faisalabad</option>
-              <option value="other">Other</option>
+              <option value="karachi" className="bg-gray-900 text-white">Karachi</option>
+              <option value="lahore" className="bg-gray-900 text-white">Lahore</option>
+              <option value="islamabad" className="bg-gray-900 text-white">Islamabad</option>
+              <option value="peshawar" className="bg-gray-900 text-white">Peshawar</option>
+              <option value="quetta" className="bg-gray-900 text-white">Quetta</option>
+              <option value="multan" className="bg-gray-900 text-white">Multan</option>
+              <option value="faisalabad" className="bg-gray-900 text-white">Faisalabad</option>
+              <option value="other" className="bg-gray-900 text-white">Other</option>
             </select>
           </div>
         </div>
@@ -136,11 +148,18 @@ export default function PreferencesForm({ onSubmit, loading }: PreferencesFormPr
               onChange={(e) => updatePreferences('budget', parseInt(e.target.value))}
               className="w-full px-4 py-3 bg-white/5 border border-yellow-400/20 rounded-xl 
                        text-white focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400/50
-                       backdrop-blur-sm transition-all"
+                       backdrop-blur-sm transition-all appearance-none cursor-pointer"
+              style={{
+                backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23fbbf24' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+                backgroundPosition: 'right 0.5rem center',
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: '1.5em 1.5em'
+              }}
             >
-              <option value="1500">Economy (PKR 1,500-2,000)</option>
-              <option value="2500">Standard (PKR 2,500-3,500)</option>
-              <option value="4000">Premium (PKR 4,000+)</option>
+              <option value="1000" className="bg-gray-900 text-white">Budget (PKR 1,000-1,500)</option>
+              <option value="1500" className="bg-gray-900 text-white">Economy (PKR 1,500-2,000)</option>
+              <option value="2500" className="bg-gray-900 text-white">Standard (PKR 2,500-3,500)</option>
+              <option value="4000" className="bg-gray-900 text-white">Premium (PKR 4,000+)</option>
             </select>
           </div>
 
@@ -153,11 +172,17 @@ export default function PreferencesForm({ onSubmit, loading }: PreferencesFormPr
               onChange={(e) => updatePreferences('cookingTime', e.target.value)}
               className="w-full px-4 py-3 bg-white/5 border border-yellow-400/20 rounded-xl 
                        text-white focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400/50
-                       backdrop-blur-sm transition-all"
+                       backdrop-blur-sm transition-all appearance-none cursor-pointer"
+              style={{
+                backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23fbbf24' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+                backgroundPosition: 'right 0.5rem center',
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: '1.5em 1.5em'
+              }}
             >
-              <option value="quick">Quick (30 mins max)</option>
-              <option value="moderate">Moderate (1-2 hours)</option>
-              <option value="full">Full preparation (3+ hours)</option>
+              <option value="quick" className="bg-gray-900 text-white">Quick (30 mins max)</option>
+              <option value="moderate" className="bg-gray-900 text-white">Moderate (1-2 hours)</option>
+              <option value="full" className="bg-gray-900 text-white">Full preparation (3+ hours)</option>
             </select>
           </div>
         </div>
@@ -179,13 +204,19 @@ export default function PreferencesForm({ onSubmit, loading }: PreferencesFormPr
               onChange={(e) => updatePreferences('cuisineType', e.target.value)}
               className="w-full px-4 py-3 bg-white/5 border border-yellow-400/20 rounded-xl 
                        text-white focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400/50
-                       backdrop-blur-sm transition-all"
+                       backdrop-blur-sm transition-all appearance-none cursor-pointer"
+              style={{
+                backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23fbbf24' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+                backgroundPosition: 'right 0.5rem center',
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: '1.5em 1.5em'
+              }}
             >
-              <option value="punjabi">Punjabi</option>
-              <option value="sindhi">Sindhi</option>
-              <option value="mughlai">Mughlai</option>
-              <option value="karachi">Karachi-style</option>
-              <option value="home">Simple Home-style</option>
+              <option value="punjabi" className="bg-gray-900 text-white">Punjabi</option>
+              <option value="sindhi" className="bg-gray-900 text-white">Sindhi</option>
+              <option value="mughlai" className="bg-gray-900 text-white">Mughlai</option>
+              <option value="karachi" className="bg-gray-900 text-white">Karachi-style</option>
+              <option value="home" className="bg-gray-900 text-white">Simple Home-style</option>
             </select>
           </div>
 
@@ -237,11 +268,17 @@ export default function PreferencesForm({ onSubmit, loading }: PreferencesFormPr
               onChange={(e) => updatePreferences('calorieTarget', e.target.value)}
               className="w-full px-4 py-3 bg-white/5 border border-yellow-400/20 rounded-xl 
                        text-white focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400/50
-                       backdrop-blur-sm transition-all"
+                       backdrop-blur-sm transition-all appearance-none cursor-pointer"
+              style={{
+                backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23fbbf24' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+                backgroundPosition: 'right 0.5rem center',
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: '1.5em 1.5em'
+              }}
             >
-              <option value="light">Light (300-400 cal per meal)</option>
-              <option value="moderate">Moderate (400-600 cal per meal)</option>
-              <option value="high">High-energy (600+ cal per meal)</option>
+              <option value="light" className="bg-gray-900 text-white">Light (300-400 cal per meal)</option>
+              <option value="moderate" className="bg-gray-900 text-white">Moderate (400-600 cal per meal)</option>
+              <option value="high" className="bg-gray-900 text-white">High-energy (600+ cal per meal)</option>
             </select>
           </div>
 
@@ -290,11 +327,17 @@ export default function PreferencesForm({ onSubmit, loading }: PreferencesFormPr
             onChange={(e) => updatePreferences('equipment', e.target.value)}
             className="w-full px-4 py-3 bg-white/5 border border-yellow-400/20 rounded-xl 
                      text-white focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400/50
-                     backdrop-blur-sm transition-all"
+                     backdrop-blur-sm transition-all appearance-none cursor-pointer"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23fbbf24' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+              backgroundPosition: 'right 0.5rem center',
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: '1.5em 1.5em'
+            }}
           >
-            <option value="basic">Basic (stove + pan)</option>
-            <option value="moderate">Moderate (oven, blender)</option>
-            <option value="full">Full kitchen (air fryer, slow cooker, etc.)</option>
+            <option value="basic" className="bg-gray-900 text-white">Basic (stove + pan)</option>
+            <option value="moderate" className="bg-gray-900 text-white">Moderate (oven, blender)</option>
+            <option value="full" className="bg-gray-900 text-white">Full kitchen (air fryer, slow cooker, etc.)</option>
           </select>
         </div>
       </GlassCard>

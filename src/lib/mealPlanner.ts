@@ -2,7 +2,7 @@ import { Recipe, UserPreferences, DayPlan, MealPlan } from '@/types';
 import { pakistaniRecipes } from '@/data/recipes';
 
 export class MealPlannerService {
-  private responseDelay = 2000; // 2 second delay to simulate API call
+  private responseDelay = 500; // 0.5 second delay for better UX
 
   async generateMealPlan(preferences: UserPreferences): Promise<MealPlan> {
     return new Promise((resolve) => {
