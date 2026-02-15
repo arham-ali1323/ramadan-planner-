@@ -1,4 +1,16 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ramadan Iftar/Suhoor Planner
+
+A Next.js application for planning authentic Pakistani Ramadan meals with personalized recommendations based on family preferences, dietary requirements, and budget constraints.
+
+## Features
+
+- 🌙 **Personalized Meal Planning** - Generate 30-day Ramadan meal plans
+- 🍽 **Authentic Pakistani Recipes** - 26+ traditional suhoor and iftar recipes
+- 🎯 **Customizable Preferences** - Family size, budget, dietary restrictions, cooking time
+- 🌍 **Regional Variety** - Punjabi, Sindhi, Mughlai, Balochi, Kashmiri cuisines
+- 💰 **Budget Planning** - Cost estimation and shopping list generation
+- 🥗 **Dietary Options** - Vegetarian, diabetic-friendly, high-protein options
+- ⚡ **Fast Performance** - Optimized meal plan generation
 
 ## Getting Started
 
@@ -16,9 +28,30 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Recipe Collection
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The app includes authentic Pakistani recipes:
+
+### Suhoor Options (9 recipes)
+- Nihari, Haleem, Anda Paratha, Chana Chaat, Yogurt with Muesli, Samosa
+- Murgh Chana, Kashmiri Chai, Halwa Puri, Methi Paratha, Kheer
+- Chicken Qeema, Lassi, Makai ki Roti, Egg Bhurji
+
+### Iftar Options (17 recipes)
+- Biryani, Chicken Karahi, Seekh Kebab, Aloo Gosht, Daal Chawal, Qorma
+- Fish Curry, Mixed Vegetable Curry, Sindhi Biryani, Peshawari Chapli Kebab
+- Multani Sohan Halwa, Balochi Sajji, Chicken Tikka, Mutton Paya
+- Aloo Samosa, Dahi Baray, Fruit Chaat, Kachori, Chana Chaat with Papri
+- Jalebi, Shami Kebab, Mutton Karahi, Kabuli Pulao
+
+## Technology Stack
+
+- **Frontend**: Next.js 16 with React 19
+- **Styling**: Tailwind CSS 4
+- **Animations**: Framer Motion
+- **Icons**: Lucide React & Heroicons
+- **TypeScript**: Full type safety
+- **Build**: Turbopack for fast builds
 
 ## Learn More
 
