@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { DayPlan, MealPlan } from '@/types';
-import GlassCard from '@/components/ui/GlassCard';
 import { useState } from 'react';
 
 interface MealPlanDisplayProps {
@@ -53,214 +52,244 @@ export default function MealPlanDisplay({ mealPlan }: MealPlanDisplayProps) {
   };
 
   return (
-    <div className="space-y-8">
-      {/* Header */}
-      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
-        <h2 className="text-3xl font-bold text-white">Your 30-Day Ramadan Menu</h2>
-        <div className="flex flex-wrap gap-3">
-          <button
-            onClick={exportJSON}
-            className="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-yellow-400 
-                     font-semibold rounded-xl shadow-lg shadow-blue-600/30
-                     hover:shadow-xl hover:shadow-blue-600/50 hover:translate-y-[-2px]
-                     transition-all duration-300"
-          >
-            Export JSON
-          </button>
-          <button
-            onClick={exportTXT}
-            className="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-yellow-400 
-                     font-semibold rounded-xl shadow-lg shadow-blue-600/30
-                     hover:shadow-xl hover:shadow-blue-600/50 hover:translate-y-[-2px]
-                     transition-all duration-300"
-          >
-            Export TXT
-          </button>
+    <div className="max-w-6xl mx-auto space-y-8">
+      {/* Header with Export Options */}
+      <div className="bg-white dark:bg-gray-800/50 backdrop-blur-xl rounded-xl shadow-lg dark:shadow-yellow-400/20 border border-gray-200 dark:border-yellow-400/20 p-6">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+              Your Ramadan Meal Plan
+            </h2>
+            <p className="text-gray-600 dark:text-gray-300">
+              30 days of personalized meals for {mealPlan.preferences.familySize} people
+            </p>
+          </div>
+          <div className="flex gap-3">
+            <button
+              onClick={exportJSON}
+              className="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors text-sm font-medium"
+            >
+              Export JSON
+            </button>
+            <button
+              onClick={exportTXT}
+              className="px-4 py-2 bg-emerald-600 dark:bg-yellow-400 text-white dark:text-gray-900 rounded-lg hover:bg-emerald-700 dark:hover:bg-yellow-500 transition-colors text-sm font-medium"
+            >
+              Export Plan
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Budget Overview */}
-      <GlassCard className="p-8">
-        <h3 className="text-2xl font-bold text-yellow-400 mb-6">Budget Overview</h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white/5 p-6 rounded-xl border border-yellow-400/20">
-            <div className="text-gray-400 text-sm font-medium mb-2">Daily Budget</div>
-            <div className="text-2xl font-bold text-yellow-400">PKR {mealPlan.preferences.budget}</div>
-          </div>
-          <div className="bg-white/5 p-6 rounded-xl border border-yellow-400/20">
-            <div className="text-gray-400 text-sm font-medium mb-2">Total Budget (30 days)</div>
-            <div className="text-2xl font-bold text-yellow-400">PKR {mealPlan.totalBudget}</div>
-          </div>
-          <div className="bg-white/5 p-6 rounded-xl border border-yellow-400/20">
-            <div className="text-gray-400 text-sm font-medium mb-2">Estimated Cost</div>
-            <div className="text-2xl font-bold text-yellow-400">PKR {mealPlan.estimatedCost}</div>
+      {/* Summary Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="bg-white dark:bg-gray-800/50 backdrop-blur-xl rounded-xl shadow-lg dark:shadow-yellow-400/20 border border-gray-200 dark:border-yellow-400/20 p-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm text-gray-600 dark:text-gray-300">Total Budget</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">PKR {mealPlan.totalBudget?.toLocaleString() || '0'}</p>
+            </div>
+            <div className="w-12 h-12 bg-emerald-100 dark:bg-yellow-400/20 rounded-lg flex items-center justify-center">
+              <span className="text-emerald-600 dark:text-yellow-400 text-xl">💰</span>
+            </div>
           </div>
         </div>
-      </GlassCard>
 
-      {/* Menu Calendar */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {mealPlan.menu.map((day, index) => (
-          <motion.div
-            key={day.day}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-          >
-            <GlassCard className="p-6 cursor-pointer" onClick={() => setSelectedDay(day)}>
-              <div className="flex justify-between items-center mb-4 pb-3 border-b border-yellow-400/20">
-                <span className="text-xl font-bold text-yellow-400">Day {day.day}</span>
-                <span className="px-3 py-1 bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 
-                               text-xs font-bold rounded-full uppercase">
-                  ✓ Halal
-                </span>
+        <div className="bg-white dark:bg-gray-800/50 backdrop-blur-xl rounded-xl shadow-lg dark:shadow-yellow-400/20 border border-gray-200 dark:border-yellow-400/20 p-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm text-gray-600 dark:text-gray-300">Estimated Cost</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">PKR {mealPlan.estimatedCost?.toLocaleString()}</p>
+            </div>
+            <div className="w-12 h-12 bg-blue-100 dark:bg-yellow-400/20 rounded-lg flex items-center justify-center">
+              <span className="text-blue-600 dark:text-yellow-400 text-xl">📊</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white dark:bg-gray-800/50 backdrop-blur-xl rounded-xl shadow-lg dark:shadow-yellow-400/20 border border-gray-200 dark:border-yellow-400/20 p-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm text-gray-600 dark:text-gray-300">Days Planned</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">{mealPlan.menu.length}</p>
+            </div>
+            <div className="w-12 h-12 bg-purple-100 dark:bg-yellow-400/20 rounded-lg flex items-center justify-center">
+              <span className="text-purple-600 dark:text-yellow-400 text-xl">📅</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Meal Plan Days */}
+      <div className="bg-white dark:bg-gray-800/50 backdrop-blur-xl rounded-xl shadow-lg dark:shadow-yellow-400/20 border border-gray-200 dark:border-yellow-400/20 p-6">
+        <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">Daily Meal Schedule</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {mealPlan.menu.map((day, index) => (
+            <motion.div
+              key={day.day}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: index * 0.05 }}
+              className="border border-gray-200 dark:border-yellow-400/30 rounded-lg p-4 hover:shadow-md dark:hover:shadow-yellow-400/20 transition-shadow cursor-pointer bg-white dark:bg-gray-800/50"
+              onClick={() => setSelectedDay(day)}
+            >
+              <div className="flex justify-between items-start mb-3">
+                <h4 className="font-semibold text-gray-900 dark:text-white">Day {day.day}</h4>
+                <span className="text-sm text-gray-500 dark:text-gray-400">{day.date}</span>
               </div>
               
-              <div className="space-y-4">
-                <div>
-                  <div className="text-gray-400 text-sm font-medium mb-2 flex items-center gap-2">
-                    🌅 Suhoor
-                  </div>
-                  <div className="bg-white/5 p-3 rounded-lg border border-yellow-400/10">
-                    <div className="text-white font-medium">{day.suhoor.name}</div>
-                    <div className="text-gray-400 text-sm mt-1">
-                      {day.suhoor.nutrition.calories} cal | {day.suhoor.nutrition.protein}g protein
-                    </div>
+              <div className="space-y-3">
+                <div className="bg-emerald-50 dark:bg-emerald-900/30 rounded-lg p-3">
+                  <p className="text-xs font-medium text-emerald-700 dark:text-emerald-400 mb-1">SUHOOR</p>
+                  <p className="text-sm font-medium text-gray-900 dark:text-white">{day.suhoor.name}</p>
+                  <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mt-1">
+                    <span>{day.suhoor.nutrition.calories} cal</span>
+                    <span>PKR {day.suhoor.cost}</span>
                   </div>
                 </div>
                 
-                <div>
-                  <div className="text-gray-400 text-sm font-medium mb-2 flex items-center gap-2">
-                    🌙 Iftar
-                  </div>
-                  <div className="bg-white/5 p-3 rounded-lg border border-yellow-400/10">
-                    <div className="text-white font-medium">{day.iftar.name}</div>
-                    <div className="text-gray-400 text-sm mt-1">
-                      {day.iftar.nutrition.calories} cal | {day.iftar.nutrition.protein}g protein
-                    </div>
+                <div className="bg-orange-50 dark:bg-orange-900/30 rounded-lg p-3">
+                  <p className="text-xs font-medium text-orange-700 dark:text-orange-400 mb-1">IFTAR</p>
+                  <p className="text-sm font-medium text-gray-900 dark:text-white">{day.iftar.name}</p>
+                  <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mt-1">
+                    <span>{day.iftar.nutrition.calories} cal</span>
+                    <span>PKR {day.iftar.cost}</span>
                   </div>
                 </div>
                 
-                <div className="pt-3 border-t border-yellow-400/20">
-                  <div className="text-gray-400 text-sm">Daily Cost</div>
-                  <div className="text-yellow-400 font-bold">PKR {day.totalCost}</div>
+                <div className="border-t border-gray-200 dark:border-yellow-400/30 pt-2">
+                  <div className="flex justify-between text-sm">
+                    <span className="font-medium text-gray-700 dark:text-gray-300">Daily Total</span>
+                    <span className="font-semibold text-gray-900 dark:text-white">PKR {day.totalCost}</span>
+                  </div>
                 </div>
               </div>
-            </GlassCard>
-          </motion.div>
-        ))}
+            </motion.div>
+          ))}
+        </div>
       </div>
 
       {/* Shopping List */}
-      <GlassCard className="p-8">
-        <h3 className="text-2xl font-bold text-yellow-400 mb-6">Shopping List</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {mealPlan.shoppingList && Object.entries(mealPlan.shoppingList).map(([category, items]) => (
-            <div key={category} className="bg-white/5 p-6 rounded-xl border border-yellow-400/20">
-              <h4 className="text-lg font-semibold text-white mb-4 pb-2 border-b border-yellow-400/20">
-                {category}
-              </h4>
-              <div className="space-y-2">
-                {Object.entries(items).map(([ingredient, count]) => (
-                  <div key={ingredient} className="flex justify-between text-sm">
-                    <span className="text-gray-300">{ingredient}</span>
-                    <span className="text-yellow-400 font-medium">{count}x</span>
-                  </div>
-                ))}
+      {mealPlan.shoppingList && (
+        <div className="bg-white dark:bg-gray-800/50 backdrop-blur-xl rounded-xl shadow-lg dark:shadow-yellow-400/20 border border-gray-200 dark:border-yellow-400/20 p-6">
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">Shopping List</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {Object.entries(mealPlan.shoppingList).map(([category, items]) => (
+              <div key={category} className="bg-gray-50 dark:bg-gray-900/50 rounded-lg p-4">
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-3 pb-2 border-b border-gray-200 dark:border-yellow-400/30">
+                  {category}
+                </h4>
+                <div className="space-y-2">
+                  {Object.entries(items).map(([ingredient, count]) => (
+                    <div key={ingredient} className="flex justify-between text-sm">
+                      <span className="text-gray-700 dark:text-gray-300">{ingredient}</span>
+                      <span className="font-medium text-emerald-600 dark:text-yellow-400">{count}x</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </GlassCard>
+      )}
 
       {/* Day Detail Modal */}
       {selectedDay && (
-        <motion.div
-          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={() => setSelectedDay(null)}
-        >
+        <div className="fixed inset-0 bg-black bg-opacity-50 dark:bg-opacity-70 flex items-center justify-center p-4 z-50">
           <motion.div
-            className="bg-gray-900/90 backdrop-blur-xl border border-yellow-400/20 rounded-2xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.9, opacity: 0 }}
-            onClick={(e) => e.stopPropagation()}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-white dark:bg-gray-800/95 backdrop-blur-xl rounded-xl shadow-xl dark:shadow-yellow-400/30 max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-gray-200 dark:border-yellow-400/30"
           >
-            <div className="flex justify-between items-start mb-6">
-              <h3 className="text-2xl font-bold text-yellow-400">Day {selectedDay.day} Details</h3>
-              <button
-                onClick={() => setSelectedDay(null)}
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                ✕
-              </button>
-            </div>
-            
-            <div className="space-y-6">
-              <div>
-                <h4 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
-                  🌅 Suhoor: {selectedDay.suhoor.name}
-                </h4>
-                <p className="text-gray-300 mb-3">{selectedDay.suhoor.description}</p>
-                <div className="bg-white/5 p-4 rounded-lg border border-yellow-400/10">
-                  <h5 className="text-yellow-400 font-medium mb-2">Nutrition</h5>
-                  <div className="grid grid-cols-2 gap-2 text-sm">
-                    <div>Calories: {selectedDay.suhoor.nutrition.calories}</div>
-                    <div>Protein: {selectedDay.suhoor.nutrition.protein}g</div>
-                    <div>Carbs: {selectedDay.suhoor.nutrition.carbs}g</div>
-                    <div>Fat: {selectedDay.suhoor.nutrition.fat}g</div>
+            <div className="p-6">
+              <div className="flex justify-between items-start mb-6">
+                <div>
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Day {selectedDay.day}</h3>
+                  <p className="text-gray-600 dark:text-gray-300">{selectedDay.date}</p>
+                </div>
+                <button
+                  onClick={() => setSelectedDay(null)}
+                  className="text-gray-400 hover:text-gray-600 dark:hover:text-yellow-400 text-2xl leading-none"
+                >
+                  ×
+                </button>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="bg-emerald-50 dark:bg-emerald-900/30 rounded-lg p-6">
+                  <h4 className="font-semibold text-emerald-700 dark:text-emerald-400 mb-3">SUHOOR</h4>
+                  <h5 className="text-lg font-medium text-gray-900 dark:text-white mb-2">{selectedDay.suhoor.name}</h5>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">{selectedDay.suhoor.description}</p>
+                  
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-gray-600 dark:text-gray-400">Calories:</span>
+                      <span className="font-medium text-gray-900 dark:text-white">{selectedDay.suhoor.nutrition.calories}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600 dark:text-gray-400">Protein:</span>
+                      <span className="font-medium text-gray-900 dark:text-white">{selectedDay.suhoor.nutrition.protein || 0}g</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600 dark:text-gray-400">Cost:</span>
+                      <span className="font-medium text-gray-900 dark:text-white">PKR {selectedDay.suhoor.cost}</span>
+                    </div>
+                  </div>
+
+                  <div className="mt-4">
+                    <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Ingredients:</p>
+                    <div className="flex flex-wrap gap-1">
+                      {selectedDay.suhoor.ingredients.map((ingredient, idx) => (
+                        <span key={idx} className="px-2 py-1 bg-emerald-100 dark:bg-emerald-800/50 text-emerald-700 dark:text-emerald-400 text-xs rounded-full">
+                          {ingredient}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
-                <div className="mt-3">
-                  <h5 className="text-yellow-400 font-medium mb-2">Ingredients</h5>
-                  <div className="flex flex-wrap gap-2">
-                    {selectedDay.suhoor.ingredients.map((ingredient, index) => (
-                      <span key={index} className="px-3 py-1 bg-white/10 text-gray-300 rounded-full text-sm">
-                        {ingredient}
-                      </span>
-                    ))}
+
+                <div className="bg-orange-50 dark:bg-orange-900/30 rounded-lg p-6">
+                  <h4 className="font-semibold text-orange-700 dark:text-orange-400 mb-3">IFTAR</h4>
+                  <h5 className="text-lg font-medium text-gray-900 dark:text-white mb-2">{selectedDay.iftar.name}</h5>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">{selectedDay.iftar.description}</p>
+                  
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-gray-600 dark:text-gray-400">Calories:</span>
+                      <span className="font-medium text-gray-900 dark:text-white">{selectedDay.iftar.nutrition.calories}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600 dark:text-gray-400">Protein:</span>
+                      <span className="font-medium text-gray-900 dark:text-white">{selectedDay.iftar.nutrition.protein || 0}g</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600 dark:text-gray-400">Cost:</span>
+                      <span className="font-medium text-gray-900 dark:text-white">PKR {selectedDay.iftar.cost}</span>
+                    </div>
+                  </div>
+
+                  <div className="mt-4">
+                    <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Ingredients:</p>
+                    <div className="flex flex-wrap gap-1">
+                      {selectedDay.iftar.ingredients.map((ingredient, idx) => (
+                        <span key={idx} className="px-2 py-1 bg-orange-100 dark:bg-orange-800/50 text-orange-700 dark:text-orange-400 text-xs rounded-full">
+                          {ingredient}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
-              
-              <div>
-                <h4 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
-                  🌙 Iftar: {selectedDay.iftar.name}
-                </h4>
-                <p className="text-gray-300 mb-3">{selectedDay.iftar.description}</p>
-                <div className="bg-white/5 p-4 rounded-lg border border-yellow-400/10">
-                  <h5 className="text-yellow-400 font-medium mb-2">Nutrition</h5>
-                  <div className="grid grid-cols-2 gap-2 text-sm">
-                    <div>Calories: {selectedDay.iftar.nutrition.calories}</div>
-                    <div>Protein: {selectedDay.iftar.nutrition.protein}g</div>
-                    <div>Carbs: {selectedDay.iftar.nutrition.carbs}g</div>
-                    <div>Fat: {selectedDay.iftar.nutrition.fat}g</div>
-                  </div>
-                </div>
-                <div className="mt-3">
-                  <h5 className="text-yellow-400 font-medium mb-2">Ingredients</h5>
-                  <div className="flex flex-wrap gap-2">
-                    {selectedDay.iftar.ingredients.map((ingredient, index) => (
-                      <span key={index} className="px-3 py-1 bg-white/10 text-gray-300 rounded-full text-sm">
-                        {ingredient}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              
-              <div className="pt-4 border-t border-yellow-400/20">
+
+              <div className="mt-6 pt-6 border-t border-gray-200 dark:border-yellow-400/30">
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-400">Daily Total Cost</span>
-                  <span className="text-2xl font-bold text-yellow-400">PKR {selectedDay.totalCost}</span>
+                  <span className="text-lg font-semibold text-gray-900 dark:text-white">Daily Total Cost</span>
+                  <span className="text-xl font-bold text-emerald-600 dark:text-yellow-400">PKR {selectedDay.totalCost}</span>
                 </div>
               </div>
             </div>
           </motion.div>
-        </motion.div>
+        </div>
       )}
     </div>
   );

@@ -7,12 +7,13 @@ import { MealPlannerService } from '@/lib/mealPlanner';
 import PreferencesForm from '@/components/forms/PreferencesForm';
 import MealPlanDisplay from '@/components/results/MealPlanDisplay';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
-import ParticleBackground from '@/components/ui/ParticleBackground';
-import GlassCard from '@/components/ui/GlassCard';
+import ThemeToggle from '@/components/ui/ThemeToggle';
+import { ThemeProvider, useTheme } from '@/contexts/ThemeContext';
 
-export default function Home() {
+function HomeContent() {
   const [loading, setLoading] = useState(false);
   const [mealPlan, setMealPlan] = useState<MealPlan | null>(null);
+  const { theme } = useTheme();
   const mealPlannerService = new MealPlannerService();
 
   const handleFormSubmit = async (preferences: UserPreferences) => {
@@ -28,42 +29,47 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 relative overflow-hidden">
-      {/* Particle Background */}
-      <ParticleBackground />
-      
-      {/* Golden Overlay */}
-      <div className="fixed inset-0 pointer-events-none z-10">
-        <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/10 via-transparent to-yellow-400/5" />
-        <div className="absolute inset-0 bg-gradient-to-b from-yellow-400/5 via-transparent to-yellow-400/10" />
+    <div className={`min-h-screen transition-colors duration-300 ${
+      theme === 'dark' 
+        ? 'bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900' 
+        : 'bg-gradient-to-br from-green-900 via-green-950 to-black'
+    }`}>
+      {/* Subtle pattern overlay */}
+      <div className="fixed inset-0 opacity-30 dark:opacity-20">
+        <div className="absolute inset-0 dark:hidden" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2310b981' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+        }} />
+        <div className="absolute inset-0 hidden dark:block" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23fbbf24' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+        }} />
       </div>
 
       {/* Content */}
-      <div className="relative z-20">
+      <div className="relative">
         {/* Header */}
-        <header className="relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-gray-900/90 to-blue-900/90 backdrop-blur-xl border-b border-yellow-400/20" />
-          <div className="relative container mx-auto px-6 py-16 text-center">
-            <motion.h1 
-              className="text-5xl md:text-6xl font-bold mb-4 flex flex-col md:flex-row items-center justify-center gap-4"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <span className="text-yellow-400">🌙</span>
-              <span className="bg-gradient-to-r from-white via-yellow-400 to-white bg-clip-text text-transparent">
-                Ramadan Iftar/Suhoor Planner
-              </span>
-              <span className="text-yellow-400">⭐</span>
-            </motion.h1>
-            <motion.p 
-              className="text-xl text-gray-300 max-w-2xl mx-auto"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              Plan your perfect Ramadan meals with authentic Pakistani recipes
-            </motion.p>
+        <header className={`${
+          theme === 'dark' 
+            ? 'bg-gray-900/80 border-yellow-400/20' 
+            : 'bg-green-950/80 border-green-800'
+        } backdrop-blur-sm border-b shadow-sm`}>
+          <div className="container mx-auto px-6 py-8">
+            <div className="flex justify-between items-center">
+              <div className="text-center flex-1">
+                <h1 className={`text-4xl md:text-5xl font-bold mb-3 ${
+                  theme === 'dark' ? 'text-white' : 'text-green-100'
+                }`}>
+                  Ramadan Meal Planner
+                </h1>
+                <p className={`text-lg max-w-2xl mx-auto ${
+                  theme === 'dark' ? 'text-gray-300' : 'text-green-200'
+                }`}>
+                  Create personalized suhoor and iftar meal plans for your family
+                </p>
+              </div>
+              <div className="ml-4">
+                <ThemeToggle />
+              </div>
+            </div>
           </div>
         </header>
 
@@ -73,14 +79,27 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              transition={{ duration: 0.6 }}
             >
-              <GlassCard className="p-8 md:p-12">
-                <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-8">
-                  Family Preferences & Requirements
-                </h2>
-                <PreferencesForm onSubmit={handleFormSubmit} loading={loading} />
-              </GlassCard>
+              <div className="max-w-4xl mx-auto">
+                <div className={`${
+                  theme === 'dark'
+                    ? 'bg-gray-800/50 border-yellow-400/20 shadow-yellow-400/20'
+                    : 'bg-green-900 border-green-700 shadow-green-950/50'
+                } rounded-2xl p-8 md:p-12 backdrop-blur-xl border`}>
+                  <div className="mb-8">
+                    <h2 className={`text-2xl font-semibold mb-2 ${
+                      theme === 'dark' ? 'text-white' : 'text-green-100'
+                    }`}>
+                      Family Preferences
+                    </h2>
+                    <p className={theme === 'dark' ? 'text-gray-300' : 'text-green-200'}>
+                      Tell us about your family to get personalized meal recommendations
+                    </p>
+                  </div>
+                  <PreferencesForm onSubmit={handleFormSubmit} loading={loading} />
+                </div>
+              </div>
             </motion.div>
           )}
 
@@ -90,9 +109,12 @@ export default function Home() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6 }}
             >
-              <GlassCard className="p-12">
-                <LoadingSpinner />
-              </GlassCard>
+              <div className="max-w-4xl mx-auto">
+                <div className="bg-white dark:bg-gray-800/50 backdrop-blur-xl rounded-2xl shadow-lg dark:shadow-yellow-400/20 border border-gray-200 dark:border-yellow-400/20 p-16 text-center">
+                  <LoadingSpinner />
+                  <p className="mt-4 text-gray-600 dark:text-gray-300">Creating your personalized meal plan...</p>
+                </div>
+              </div>
             </motion.div>
           )}
 
@@ -107,12 +129,9 @@ export default function Home() {
               <div className="mt-8 text-center">
                 <button
                   onClick={() => setMealPlan(null)}
-                  className="px-8 py-4 bg-gradient-to-r from-gray-700 to-gray-800 text-yellow-400 
-                           font-semibold rounded-xl shadow-lg shadow-gray-700/30
-                           hover:shadow-xl hover:shadow-gray-700/50 hover:translate-y-[-2px]
-                           transition-all duration-300"
+                  className="px-6 py-3 bg-emerald-600 dark:bg-yellow-400 text-white dark:text-gray-900 font-medium rounded-lg shadow-md hover:bg-emerald-700 dark:hover:bg-yellow-500 hover:shadow-lg transition-all duration-200"
                 >
-                  Generate New Menu
+                  Create New Plan
                 </button>
               </div>
             </motion.div>
@@ -120,15 +139,27 @@ export default function Home() {
         </main>
 
         {/* Footer */}
-        <footer className="relative mt-20 border-t border-yellow-400/20">
-          <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 to-transparent backdrop-blur-xl" />
-          <div className="relative container mx-auto px-6 py-8 text-center">
-            <p className="text-gray-400">
-              © 2026 Ramadan Planner. Made with ❤️ for the Muslim community.
-            </p>
+        <footer className="bg-gray-50 dark:bg-gray-900/90 border-t border-gray-200 dark:border-yellow-400/20 mt-20">
+          <div className="container mx-auto px-6 py-8">
+            <div className="text-center text-gray-600 dark:text-gray-300">
+              <p className="mb-2">
+                © 2026 Ramadan Meal Planner. Made with care for Muslim families.
+              </p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                Plan your Ramadan meals with authentic Pakistani recipes
+              </p>
+            </div>
           </div>
         </footer>
       </div>
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <ThemeProvider>
+      <HomeContent />
+    </ThemeProvider>
   );
 }
