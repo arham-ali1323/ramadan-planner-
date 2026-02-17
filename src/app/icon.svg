@@ -1,0 +1,27 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background with gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#065f46;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#064e3b;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <circle cx="16" cy="16" r="16" fill="url(#bgGradient)"/>
+  
+  <!-- Crescent moon -->
+  <path d="M10 10C10 10 13 12 13 15C13 18 10 20 10 20C10 20 7 18 7 15C7 12 10 10 10 10Z" fill="#fbbf24" opacity="0.9"/>
+  
+  <!-- Main star -->
+  <path d="M22 11L23 13L25 13.5L23 14L22 16L21 14L19 13.5L21 13L22 11Z" fill="#fbbf24"/>
+  
+  <!-- Decorative stars -->
+  <circle cx="8" cy="22" r="1" fill="#fbbf24" opacity="0.7"/>
+  <circle cx="24" cy="22" r="1" fill="#fbbf24" opacity="0.7"/>
+  <circle cx="6" cy="12" r="0.8" fill="#fbbf24" opacity="0.6"/>
+  <circle cx="26" cy="12" r="0.8" fill="#fbbf24" opacity="0.6"/>
+  
+  <!-- Lantern/Mosque silhouette -->
+  <rect x="14" y="18" width="4" height="6" fill="#fbbf24" opacity="0.8"/>
+  <polygon points="14,18 16,16 18,18" fill="#fbbf24" opacity="0.8"/>
+  <rect x="13" y="20" width="6" height="1" fill="#fbbf24" opacity="0.9"/>
+</svg>
