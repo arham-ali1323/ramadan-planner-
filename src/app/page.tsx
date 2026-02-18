@@ -28,6 +28,10 @@ function HomeContent() {
     }
   };
 
+  const handleReset = () => {
+    setMealPlan(null);
+  };
+
   return (
     <div className={`min-h-screen transition-colors duration-300 ${
       theme === 'dark' 
@@ -110,9 +114,15 @@ function HomeContent() {
               transition={{ duration: 0.6 }}
             >
               <div className="max-w-4xl mx-auto">
-                <div className="bg-white dark:bg-gray-800/50 backdrop-blur-xl rounded-2xl shadow-lg dark:shadow-yellow-400/20 border border-gray-200 dark:border-yellow-400/20 p-16 text-center">
+                <div className={`${
+                  theme === 'dark'
+                    ? 'bg-gray-800/50 border-yellow-400/20 shadow-yellow-400/20'
+                    : 'bg-green-900 border-green-700 shadow-green-950/50'
+                } backdrop-blur-xl rounded-2xl p-16 text-center border`}>
                   <LoadingSpinner />
-                  <p className="mt-4 text-gray-600 dark:text-gray-300">Creating your personalized meal plan...</p>
+                  <p className={`mt-4 ${theme === 'dark' ? 'text-gray-300' : 'text-green-200'}`}>
+                    Creating your personalized meal plan...
+                  </p>
                 </div>
               </div>
             </motion.div>
@@ -128,8 +138,12 @@ function HomeContent() {
               
               <div className="mt-8 text-center">
                 <button
-                  onClick={() => setMealPlan(null)}
-                  className="px-6 py-3 bg-emerald-600 dark:bg-yellow-400 text-white dark:text-gray-900 font-medium rounded-lg shadow-md hover:bg-emerald-700 dark:hover:bg-yellow-500 hover:shadow-lg transition-all duration-200"
+                  onClick={handleReset}
+                  className={`px-6 py-3 font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-200 ${
+                    theme === 'dark'
+                      ? 'bg-yellow-400 text-gray-900 hover:bg-yellow-500'
+                      : 'bg-green-600 text-white hover:bg-green-700'
+                  }`}
                 >
                   Create New Plan
                 </button>
@@ -139,13 +153,17 @@ function HomeContent() {
         </main>
 
         {/* Footer */}
-        <footer className="bg-gray-50 dark:bg-gray-900/90 border-t border-gray-200 dark:border-yellow-400/20 mt-20">
+        <footer className={`${
+          theme === 'dark'
+            ? 'bg-gray-900/90 border-yellow-400/20'
+            : 'bg-green-950/90 border-green-800'
+        } border-t mt-20`}>
           <div className="container mx-auto px-6 py-8">
-            <div className="text-center text-gray-600 dark:text-gray-300">
+            <div className={`text-center ${theme === 'dark' ? 'text-gray-300' : 'text-green-200'}`}>
               <p className="mb-2">
                 © 2026 Ramadan Meal Planner. Made with care for Muslim families.
               </p>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-green-300'}`}>
                 Plan your Ramadan meals with authentic Pakistani recipes
               </p>
             </div>
