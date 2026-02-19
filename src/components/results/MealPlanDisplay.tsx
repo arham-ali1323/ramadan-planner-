@@ -11,6 +11,23 @@ interface MealPlanDisplayProps {
 export default function MealPlanDisplay({ mealPlan }: MealPlanDisplayProps) {
   const [selectedDay, setSelectedDay] = useState<DayPlan | null>(null);
 
+  const copyShoppingList = () => {
+    if (!mealPlan.shoppingList) return;
+    
+    let listText = 'RAMADAN SHOPPING LIST\\n';
+    listText += '========================\\n\\n';
+    
+    Object.entries(mealPlan.shoppingList).forEach(([category, items]) => {
+      listText += `\\n${category.toUpperCase()}\\n`;
+      listText += '-'.repeat(category.length) + '\\n';
+      Object.entries(items).forEach(([ingredient, count]) => {
+        listText += `  • ${ingredient} (${count})\\n`;
+      });
+    });
+    
+    navigator.clipboard.writeText(listText);
+  };
+
   const exportJSON = () => {
     const dataStr = JSON.stringify(mealPlan, null, 2);
     const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
@@ -172,7 +189,15 @@ export default function MealPlanDisplay({ mealPlan }: MealPlanDisplayProps) {
       {/* Shopping List */}
       {mealPlan.shoppingList && (
         <div className="bg-white dark:bg-gray-800/50 backdrop-blur-xl rounded-xl shadow-lg dark:shadow-yellow-400/20 border border-gray-200 dark:border-yellow-400/20 p-6">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">Shopping List</h3>
+          <div className="flex justify-between items-center mb-6">
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Shopping List</h3>
+            <button
+              onClick={copyShoppingList}
+              className="px-4 py-2 bg-emerald-600 dark:bg-yellow-400 text-white dark:text-gray-900 text-sm font-medium rounded-lg hover:bg-emerald-700 dark:hover:bg-yellow-500 transition-colors"
+            >
+              Copy List
+            </button>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {Object.entries(mealPlan.shoppingList).map(([category, items]) => (
               <div key={category} className="bg-gray-50 dark:bg-gray-900/50 rounded-lg p-4">

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { UserPreferences } from '@/types';
+import { useTheme } from '@/contexts/ThemeContext';
 import GlassCard from '@/components/ui/GlassCard';
 
 interface PreferencesFormProps {
@@ -11,6 +12,7 @@ interface PreferencesFormProps {
 }
 
 export default function PreferencesForm({ onSubmit, loading }: PreferencesFormProps) {
+  const { theme } = useTheme();
   const [preferences, setPreferences] = useState<UserPreferences>({
     familySize: 4,
     budget: 2500,
@@ -250,11 +252,15 @@ export default function PreferencesForm({ onSubmit, loading }: PreferencesFormPr
       <motion.button
         type="submit"
         disabled={loading}
-        className="w-full py-3 bg-emerald-600 dark:bg-yellow-400 text-white dark:text-gray-900 font-semibold rounded-lg shadow-md hover:bg-emerald-700 dark:hover:bg-yellow-500 hover:shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+        className={`w-full py-3 font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${
+          theme === 'dark'
+            ? 'bg-yellow-400 text-gray-900 hover:bg-yellow-500'
+            : 'bg-green-600 text-white hover:bg-green-700'
+        }`}
         whileHover={{ scale: loading ? 1 : 1.02 }}
         whileTap={{ scale: loading ? 1 : 0.98 }}
       >
-        {loading ? 'Generating...' : 'Generate Ramadan Meal Plan'}
+        {loading ? 'Creating your plan...' : 'Generate Ramadan Meal Plan'}
       </motion.button>
     </form>
   );
