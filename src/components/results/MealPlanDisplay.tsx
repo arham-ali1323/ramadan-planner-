@@ -10,6 +10,7 @@ interface MealPlanDisplayProps {
 
 export default function MealPlanDisplay({ mealPlan }: MealPlanDisplayProps) {
   const [selectedDay, setSelectedDay] = useState<DayPlan | null>(null);
+  const [copied, setCopied] = useState(false);
 
   const copyShoppingList = () => {
     if (!mealPlan.shoppingList) return;
@@ -26,6 +27,8 @@ export default function MealPlanDisplay({ mealPlan }: MealPlanDisplayProps) {
     });
     
     navigator.clipboard.writeText(listText);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   const exportJSON = () => {
@@ -195,7 +198,7 @@ export default function MealPlanDisplay({ mealPlan }: MealPlanDisplayProps) {
               onClick={copyShoppingList}
               className="px-4 py-2 bg-emerald-600 dark:bg-yellow-400 text-white dark:text-gray-900 text-sm font-medium rounded-lg hover:bg-emerald-700 dark:hover:bg-yellow-500 transition-colors"
             >
-              Copy List
+              {copied ? '✓ Copied!' : '📋 Copy List'}
             </button>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -25,7 +25,7 @@ export default function LoadingSpinner() {
       <p className={`mt-6 text-lg font-light ${
         theme === 'dark' ? 'text-gray-300' : 'text-green-200'
       }`}>
-        Preparing your Ramadan meal plan...
+        🌙 Preparing your Ramadan meal plan...
       </p>
     </motion.div>
   );

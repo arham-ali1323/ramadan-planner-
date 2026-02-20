@@ -62,7 +62,7 @@ function HomeContent() {
                 <h1 className={`text-4xl md:text-5xl font-bold mb-3 ${
                   theme === 'dark' ? 'text-white' : 'text-green-100'
                 }`}>
-                  Ramadan Meal Planner
+                  🌙 Ramadan Meal Planner
                 </h1>
                 <p className={`text-lg max-w-2xl mx-auto ${
                   theme === 'dark' ? 'text-gray-300' : 'text-green-200'
@@ -161,10 +161,10 @@ function HomeContent() {
           <div className="container mx-auto px-6 py-8">
             <div className={`text-center ${theme === 'dark' ? 'text-gray-300' : 'text-green-200'}`}>
               <p className="mb-2">
-                © 2026 Ramadan Meal Planner. Made with care for Muslim families.
+                🌙 © 2026 Ramadan Meal Planner. Made with care for Muslim families.
               </p>
               <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-green-300'}`}>
-                Plan your Ramadan meals with authentic Pakistani recipes
+                Plan your Ramadan meals with authentic Pakistani recipes • Ramadan Mubarak
               </p>
             </div>
           </div>
