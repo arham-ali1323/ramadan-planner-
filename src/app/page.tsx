@@ -67,7 +67,8 @@ function HomeContent() {
                 <p className={`text-lg max-w-2xl mx-auto ${
                   theme === 'dark' ? 'text-gray-300' : 'text-green-200'
                 }`}>
-                  Create personalized suhoor and iftar meal plans for your family
+                  Create personalized suhoor and iftar meal plans for your family • 
+                  <span className="font-semibold">Ramadan Mubarak!</span>
                 </p>
               </div>
               <div className="ml-4">
@@ -161,10 +162,11 @@ function HomeContent() {
           <div className="container mx-auto px-6 py-8">
             <div className={`text-center ${theme === 'dark' ? 'text-gray-300' : 'text-green-200'}`}>
               <p className="mb-2">
-                🌙 © 2026 Ramadan Meal Planner. Made with care for Muslim families.
+                🌙 © 2026 Ramadan Meal Planner. Made with ❤️ for Muslim families.
               </p>
               <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-green-300'}`}>
-                Plan your Ramadan meals with authentic Pakistani recipes • Ramadan Mubarak
+                Plan your Ramadan meals with authentic Pakistani recipes • 
+                <span className="font-semibold">Ramadan Mubarak!</span>
               </p>
             </div>
           </div>
